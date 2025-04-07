@@ -32,7 +32,7 @@ export class BinanceEarnService implements IExchangeEarn {
             const subscribedList = await client.getFlexibleProductPosition({ size: 100 });
             for (const sub of subscribedList.rows) {
                 if (productMap.has(sub.productId)) {
-                    productMap.get(sub.productId).positions[key] = sub.totalAmount;
+                    productMap.get(sub.productId).positions[key] = parseFloat(sub.totalAmount);
                 }
             }
         }

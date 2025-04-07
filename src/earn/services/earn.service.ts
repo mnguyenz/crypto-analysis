@@ -8,7 +8,9 @@ export class EarnService {
 
     async getBonusAndCurrentAmount(): Promise<any> {
         const binanceService = this.exchangeEarnService.getExchange(ExchangeEnum.BINANCE);
-        const x = await binanceService.getBonusAndCurrentAmount();
-        return x;
+        const binance = await binanceService.getBonusAndCurrentAmount();
+        // const bybitEarnService = this.exchangeEarnService.getExchange(ExchangeEnum.BYBIT);
+        // const bybit = await bybitEarnService.getBonusAndCurrentAmount();
+        return { binance };
     }
 }
