@@ -1,19 +1,13 @@
 import { Module } from '@nestjs/common';
-import { BinanceSavingService } from './services/binance-saving.service';
-import { SavingController } from './controllers/earn.controller';
-import { SavingService } from './services/saving.service';
-import { BybitSavingService } from './services/bybit-saving.service';
-import { ExchangeSavingService } from './services/exchange-saving.service';
+import { BinanceEarnService } from './services/binance-earn.service';
+import { EarnController } from './controllers/earn.controller';
+import { EarnService } from './services/earn.service';
+import { ExchangeEarnService } from './services/exchange-ean.service';
 
 @Module({
     imports: [],
-    controllers: [SavingController],
-    providers: [
-        SavingService,
-        ExchangeSavingService,
-        BinanceSavingService,
-        BybitSavingService
-    ],
+    controllers: [EarnController],
+    providers: [EarnService, ExchangeEarnService, BinanceEarnService],
     exports: []
 })
 export class EarnModule {}

@@ -1,3 +1,3 @@
 export interface IExchangeEarn {
-    getBonusAndCurrentAmont(): Promise<any>;
+    getBonusAndCurrentAmount(): Promise<any>;
 }

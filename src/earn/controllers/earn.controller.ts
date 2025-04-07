@@ -1,14 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { SavingService } from '~saving/services/saving.service';
+import { EarnService } from '~earn/services/earn.service';
 
-@Controller('savings')
-@ApiTags('Savings')
-export class SavingController {
-    constructor(private savingService: SavingService) {}
+@Controller('earn')
+@ApiTags('Earn')
+export class EarnController {
+    constructor(private earnService: EarnService) {}
 
-    @Get('stable-products')
-    getStableProducts(): Promise<any> {
-        return this.savingService.getStableProducts();
+    @Get('bonus-and-current-amount')
+    getBonusAndCurrentAmount(): Promise<any> {
+        return this.earnService.getBonusAndCurrentAmount();
     }
 }
