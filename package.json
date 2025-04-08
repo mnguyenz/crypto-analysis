@@ -25,6 +25,7 @@
     "@nestjs/core": "11.0.1",
     "@nestjs/platform-express": "11.0.1",
     "@nestjs/swagger": "^11.1.1",
+    "bitget-api": "^2.3.5",
     "bybit-api": "^4.1.2",
     "dotenv": "^16.4.7",
     "reflect-metadata": "^0.2.0",

@@ -12,6 +12,17 @@ export const env = {
         C_API_KEY: process.env.C_BINANCE_API_KEY,
         C_API_SECRET: process.env.C_BINANCE_API_SECRET
     },
+    BITGET: {
+        M_API_KEY: process.env.M_BITGET_API_KEY,
+        M_API_SECRET: process.env.M_BITGET_API_SECRET,
+        M_API_PASS: process.env.M_BITGET_API_PASS,
+        X_API_KEY: process.env.X_BITGET_API_KEY,
+        X_API_SECRET: process.env.X_BITGET_API_SECRET,
+        X_API_PASS: process.env.X_BITGET_API_PASS,
+        C_API_KEY: process.env.C_BITGET_API_KEY,
+        C_API_SECRET: process.env.C_BITGET_API_SECRET,
+        C_API_PASS: process.env.C_BITGET_API_PASS,
+    },
     BYBIT: {
         M_API_KEY: process.env.M_BYBIT_API_KEY,
         M_API_SECRET: process.env.M_BYBIT_API_SECRET,
