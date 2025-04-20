@@ -1,3 +1,4 @@
+import { C2C } from '@binance/c2c';
 import { Spot } from '@binance/connector-typescript';
 import { env } from '~config/env.config';
 import { AccountEnum } from '~core/enums/exchanges.enum';
@@ -5,6 +6,14 @@ import { AccountEnum } from '~core/enums/exchanges.enum';
 export const M_BINANCE_CLIENT = new Spot(env.BINANCE.M_API_KEY, env.BINANCE.M_API_SECRET, {
     baseURL: env.BINANCE.API_URL
 });
+
+const configurationRestAPI = {
+    apiKey: env.BINANCE.C_API_KEY,
+    apiSecret: env.BINANCE.C_API_SECRET,
+    basePath: env.BINANCE.API_URL
+};
+
+export const M_BINANCE_C2C = new C2C({ configurationRestAPI });
 
 export const X_BINANCE_CLIENT = new Spot(env.BINANCE.X_API_KEY, env.BINANCE.X_API_SECRET, {
     baseURL: env.BINANCE.API_URL

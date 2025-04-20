@@ -8,7 +8,7 @@ export class BitgetEarnService implements IExchangeEarn {
     constructor() {}
 
     async getBonusAndCurrentAmount(): Promise<any> {
-        const earnProducts = await M_BITGET_CLIENT.getEarnSavingsProducts({ filter: 'available' });
+        const earnProducts = await M_BITGET_CLIENT.getEarnSavingsProducts();
         const filteredProducts = earnProducts.data.filter(
             (product) => EARN_ASSETS.includes(product.coin) && product.apyList.length > 1
         );
