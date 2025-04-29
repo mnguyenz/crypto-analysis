@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AccountEnum, ExchangeEnum } from '~core/enums/exchanges.enum';
 import { ExchangeAssetService } from './exchange-asset.service';
 import { AssetResponse } from '~asset/types/asset-response.type';
-import { EXCHANGE_CLIENT_MAP } from '~core/constants/exchange.constant';
+import { EXCHANGE_ASSET_MAP } from '~core/constants/exchange.constant';
 
 @Injectable()
 export class AssetService {
@@ -12,7 +12,7 @@ export class AssetService {
         const assets: Record<string, number> = {};
 
         await Promise.all(
-            Object.entries(EXCHANGE_CLIENT_MAP).flatMap(([exchange, accounts]) =>
+            Object.entries(EXCHANGE_ASSET_MAP).flatMap(([exchange, accounts]) =>
                 Object.keys(accounts).map(async (account) => {
                     const service = this.exchangeAssetService.getExchange(exchange as ExchangeEnum);
                     const overview = await service.details(account as unknown as AccountEnum);
@@ -20,7 +20,6 @@ export class AssetService {
                         assets[asset] =
                             (assets[asset] || 0) + (typeof amount === 'number' ? amount : parseFloat(String(amount)));
                     }
-                    console.log(overview);
                 })
             )
         );
@@ -29,14 +28,19 @@ export class AssetService {
     }
 
     async overview(): Promise<any> {
-        let result = 0;
+        const result: Record<string, number> = {
+            total: 0
+        };
+
         await Promise.all(
-            Object.entries(EXCHANGE_CLIENT_MAP).flatMap(([exchange, accounts]) =>
+            Object.entries(EXCHANGE_ASSET_MAP).flatMap(([exchange, accounts]) =>
                 Object.keys(accounts).map(async (account) => {
                     const service = this.exchangeAssetService.getExchange(exchange as ExchangeEnum);
                     const overview = await service.overview(account as unknown as AccountEnum);
-                    console.log(overview);
-                    result += parseFloat(overview);
+
+                    const key = `${overview.exchange} - ${overview.account}`;
+                    result[key] = overview.totalBalance;
+                    result.total += overview.totalBalance;
                 })
             )
         );

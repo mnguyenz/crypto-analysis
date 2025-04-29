@@ -1,26 +1,24 @@
-import { Wallet } from '@binance/wallet';
+import { RestClientV2 as Bitget } from 'bitget-api';
 import { Injectable } from '@nestjs/common';
 import { IExchangeAsset } from '~asset/interfaces/exchange-asset.interface';
 import { AssetResponse } from '~asset/types/asset-response.type';
-import { ASSETS } from '~core/constants/crypto-code.constant';
 import { AccountEnum, ExchangeEnum } from '~core/enums/exchanges.enum';
 
 import { getClient } from '~core/helpers/exchange.helper';
 
 @Injectable()
-export class BinanceAssetService implements IExchangeAsset {
+export class BitgetAssetService implements IExchangeAsset {
     constructor() {}
 
     async overview(account: AccountEnum): Promise<any> {
         try {
-            const client = getClient(ExchangeEnum.BINANCE, account) as Wallet;
-            const overview = await (
-                await client.restAPI.queryUserWalletBalance({ quoteAsset: ASSETS.FIAT.USDT })
-            ).data();
-            const totalBalance = overview.reduce((sum, item) => sum + parseFloat(item.balance), 0);
-            return { exchange: ExchangeEnum.BINANCE, account, totalBalance };
+            const client = getClient(ExchangeEnum.BITGET, account) as Bitget;
+            const overview = await client.getBalances();
+            console.log('overview', overview);
+            const totalBalance = overview.data.reduce((sum, item) => sum + parseFloat(item.usdtBalance), 0);
+            return { exchange: ExchangeEnum.BITGET, account, totalBalance };
         } catch (error) {
-            console.error('Error BinanceAssetService overview:', error);
+            console.error('Error BitgetAssetService overview:', error);
         }
     }
 
@@ -36,7 +34,7 @@ export class BinanceAssetService implements IExchangeAsset {
             // return mergeAndSumAssets(spotResponse, flexibleEarnsResponse, lockedEarnsResponse);
             return {};
         } catch (error) {
-            console.error('Error BinanceAssetService details:', error);
+            console.error('Error BitgetAssetService details:', error);
         }
     }
 }

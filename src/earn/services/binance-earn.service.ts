@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BINANCE_CLIENTS, M_BINANCE_CLIENT } from '~core/constants/binance.constant';
+import { BINANCE_EARN_CLIENTS, M_BINANCE_EARN } from '~core/constants/binance.constant';
 import { EARN_ASSETS } from '~core/constants/crypto-code.constant';
 import { IExchangeEarn } from '~earn/interfaces/exchange-earn.interface';
 
@@ -8,13 +8,15 @@ export class BinanceEarnService implements IExchangeEarn {
     constructor() {}
 
     async getBonusAndCurrentAmount(): Promise<any> {
-        const flexibleEarn = await M_BINANCE_CLIENT.getSimpleEarnFlexibleProductList();
+        const flexibleEarn = await (await M_BINANCE_EARN.restAPI.getSimpleEarnFlexibleProductList()).data();
         const { total } = flexibleEarn;
         const totalPages = Math.ceil(total / 100);
         const earnProducts = [];
 
         for (let current = 1; current <= totalPages; current++) {
-            const earnData = await M_BINANCE_CLIENT.getSimpleEarnFlexibleProductList({ current, size: 100 });
+            const earnData = await (
+                await M_BINANCE_EARN.restAPI.getSimpleEarnFlexibleProductList({ current, size: 100 })
+            ).data();
             earnProducts.push(earnData.rows);
         }
 
@@ -28,8 +30,8 @@ export class BinanceEarnService implements IExchangeEarn {
             });
         }
 
-        for (const { key, client } of BINANCE_CLIENTS) {
-            const subscribedList = await client.getFlexibleProductPosition({ size: 100 });
+        for (const { key, client } of BINANCE_EARN_CLIENTS) {
+            const subscribedList = await (await client.restAPI.getFlexibleProductPosition({ size: 100 })).data();
             for (const sub of subscribedList.rows) {
                 if (productMap.has(sub.productId)) {
                     productMap.get(sub.productId).positions[key] = parseFloat(sub.totalAmount);

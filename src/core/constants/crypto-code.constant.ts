@@ -19,3 +19,6 @@ export const EARN_ASSETS = [
     ASSETS.CRYPTO.ETH,
     ASSETS.CRYPTO.BNB
 ];
+
+export const POSTFIX_HYPHEN_USDT = '-USDT';
+export const POSTFIX_NO_HYPHEN_USDT = 'USDT';
