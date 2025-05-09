@@ -6,7 +6,7 @@ import { IExchangeP2P } from '~p2p/interfaces/exchange-p2p.interface';
 export class BinanceP2PService implements IExchangeP2P {
     constructor() {}
 
-    async getP2PTrades(): Promise<any> {
+    async seedP2PTrades(): Promise<any> {
         const flexibleP2P = await M_BINANCE_C2C.restAPI.getC2CTradeHistory({
             startTime: 1741136400,
             endTime: 1741482000

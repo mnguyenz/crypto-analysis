@@ -32,6 +32,7 @@
     "bitget-api": "^2.3.5",
     "bybit-api": "4.1.4",
     "dotenv": "^16.4.7",
+    "googleapis": "^148.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

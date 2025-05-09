@@ -8,9 +8,9 @@ export class P2PService {
 
     async getP2PTrades(): Promise<any> {
         const binanceP2PService = this.exchangeP2PService.getExchange(ExchangeEnum.BINANCE);
-        const binance = await binanceP2PService.getP2PTrades();
+        const binance = await binanceP2PService.seedP2PTrades();
         const bybitP2PService = this.exchangeP2PService.getExchange(ExchangeEnum.BYBIT);
-        const bybit = await bybitP2PService.getP2PTrades();
+        const bybit = await bybitP2PService.seedP2PTrades();
         return { binance, bybit };
     }
 }

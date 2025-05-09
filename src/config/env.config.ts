@@ -3,6 +3,10 @@ dotenv.config();
 
 export const env = {
     APP_PORT: process.env.APP_PORT || 4003,
+    GOOGLE: {
+        CLIENT_EMAIL: process.env.GOOGLE_CLIENT_EMAIL,
+        PRIVATE_KEY: process.env.GOOGLE_PRIVATE_KEY
+    },
     BINANCE: {
         API_URL: process.env.BINANCE_API_URL,
         M_API_KEY: process.env.M_BINANCE_API_KEY,
